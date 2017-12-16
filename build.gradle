@@ -1,0 +1,47 @@
+buildscript {
+  ext {
+    springBootVersion = '1.5.7.RELEASE'
+  }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.springframework.boot'
+
+group = "${group}"
+version = "${version_application}"
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "${group}"
+            artifactId "${project_name}"
+            version "${version_application}"
+
+            from components.java
+        }
+    }
+}
+
+dependencies {
+  compile(
+    'com.google.apis:google-api-services-bigquery:v2-rev317-1.22.0',
+	'com.google.oauth-client:google-oauth-client:1.21.0',
+	'com.google.http-client:google-http-client-jackson2:1.21.0',
+	'com.google.oauth-client:google-oauth-client-jetty:1.21.0',
+	'com.google.code.gson:gson:2.7',
+  )
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+}
