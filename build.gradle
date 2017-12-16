@@ -37,11 +37,12 @@ publishing {
 
 dependencies {
   compile(
+    'org.projectlombok:lombok:1.16.18',
     'com.google.apis:google-api-services-bigquery:v2-rev317-1.22.0',
-	'com.google.oauth-client:google-oauth-client:1.21.0',
-	'com.google.http-client:google-http-client-jackson2:1.21.0',
-	'com.google.oauth-client:google-oauth-client-jetty:1.21.0',
-	'com.google.code.gson:gson:2.7',
+    'com.google.oauth-client:google-oauth-client:1.21.0',
+    'com.google.http-client:google-http-client-jackson2:1.21.0',
+    'com.google.oauth-client:google-oauth-client-jetty:1.21.0',
+    'com.google.code.gson:gson:2.7',
   )
   testCompile('org.springframework.boot:spring-boot-starter-test')
 }
