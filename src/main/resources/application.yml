@@ -1,3 +1,6 @@
 # GCPAPI
 google:
   projectId: crypto-trader-xyz
+  # second
+  requestRate: 30
+  

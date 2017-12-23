@@ -11,4 +11,6 @@ import lombok.Data;
 public class GoogleProperty {
 
   private String projectId;
+  
+  private Integer requestRate;
 }

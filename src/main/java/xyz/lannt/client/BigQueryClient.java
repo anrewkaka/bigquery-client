@@ -61,10 +61,12 @@ public class BigQueryClient {
   }
 
   private GetQueryResultsResponse executeQuery(String sqlQuery) {
+    System.out.println("Query: " + sqlQuery);
     QueryResponse query;
     GetQueryResultsResponse queryResult;
     try {
-      query = bigquery.jobs().query(this.property.getProjectId(), new QueryRequest().setQuery(sqlQuery)).execute();
+      QueryRequest queryRequest = new QueryRequest().setQuery(sqlQuery).setUseLegacySql(false);
+      query = bigquery.jobs().query(this.property.getProjectId(), queryRequest).execute();
       queryResult = bigquery.jobs()
           .getQueryResults(query.getJobReference().getProjectId(), query.getJobReference().getJobId()).execute();
     } catch (IOException e) {

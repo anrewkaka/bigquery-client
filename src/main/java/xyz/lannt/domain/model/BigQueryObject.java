@@ -18,21 +18,27 @@ public interface BigQueryObject {
     query.append(datasetName + ".");
     query.append(tableName + " ");
     query.append("(");
-    query.append(
-        getFields(getClass()).stream()
-            .map(e -> getFieldName(e))
-            .reduce((v1, v2) -> String.join(", ", v1, v2))
-            .orElseThrow(() -> new BigQueryClientException("BigQuery field not found")));
-    query.append(")\r");
+    query.append(getFieldNames());
+    query.append(") ");
     query.append("VALUES (");
-    query.append(
-        getFields(getClass()).stream()
-            .map(e -> getFieldValue(e))
-            .reduce((v1, v2) -> String.join(", ", v1, v2))
-            .orElseThrow(() -> new BigQueryClientException("BigQuery field not found")));
+    query.append(getFieldValues());
     query.append(")");
 
     return query.toString();
+  }
+
+  default String getFieldNames() {
+    return getFields(getClass()).stream()
+        .map(e -> getFieldName(e))
+        .reduce((v1, v2) -> String.join(", ", v1, v2))
+        .orElseThrow(() -> new BigQueryClientException("BigQuery field not found"));
+  }
+
+  default String getFieldValues() {
+    return getFields(getClass()).stream()
+        .map(e -> getFieldValue(e))
+        .reduce((v1, v2) -> String.join(", ", v1, v2))
+        .orElseThrow(() -> new BigQueryClientException("BigQuery field not found"));
   }
 
   default String getFieldName(Field field) {

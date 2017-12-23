@@ -37,6 +37,7 @@ publishing {
 
 dependencies {
   compile(
+    'org.springframework.boot:spring-boot-starter-web',
     'org.projectlombok:lombok:1.16.18',
     'com.google.apis:google-api-services-bigquery:v2-rev317-1.22.0',
     'com.google.oauth-client:google-oauth-client:1.21.0',
